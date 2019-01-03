@@ -23,10 +23,13 @@ class App extends React.Component {
     this.state = {
       todos: todoArray,
       taskTitle: '',
+      isComplete: false,
     };
     this.handleToggle = this.handleToggle.bind(this);
     this.handleAddTodo = this.handleAddTodo.bind(this);
     this.handleChange = this.handleChange.bind(this);
+
+    console.log(this.state.todos)
   }
 
   handleToggle(e) {
@@ -40,6 +43,8 @@ class App extends React.Component {
     });
 
     this.setState({todos: todoArray});
+    console.log(this.state.todos)
+
   }
 
   handleChange(e) {
@@ -50,16 +55,14 @@ class App extends React.Component {
     if (this.state.taskTitle === ''){return}
 
     if (e.type === 'keydown') {
-      if(e.key !== 'Enter') {
-        return;
-      } 
+      if(e.key !== 'Enter') {return} 
     }
     
     todoArray.push(
       {
         task: this.state.taskTitle,
         id: Date.now(),
-        completed: false
+        completed: this.state.isComplete,
       }
     )
     this.setState({todos: todoArray, taskTitle: ''});

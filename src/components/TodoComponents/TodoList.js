@@ -1,5 +1,7 @@
 import React from 'react';
 import Todo from './Todo';
+import './Todo.css';
+
 
 const TodoList = props => {
     return (
@@ -10,6 +12,7 @@ const TodoList = props => {
                     taskId={todoItem.id} 
                     task={todoItem.task} 
                     updateTask={props.toggleTask}
+                    className={todoItem.completed ? 'complete' : 'incomplete'}
                 />
             )}
         </ul>
