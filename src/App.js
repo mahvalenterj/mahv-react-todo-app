@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoList from '../src/components/TodoComponents/TodoList';
+import TodoForm from '../src/components/TodoComponents/TodoForm';
 
 const todoArray = [
   {
@@ -15,26 +16,49 @@ const todoArray = [
 ];
 
 class App extends React.Component {
-  // you will need a place to store your state in this component.
-  // design `App` to be the parent component of your application.
-  // this component is going to take care of state, and any change handlers you need to work with your state
+
   constructor() {
     super();
     this.state = {
       todos: todoArray,
+      taskTitle: '',
     };
+    this.handleAddTodo = this.handleAddTodo.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({taskTitle: e.target.value});
+  }
+
+  handleAddTodo(e) {
+
+    if (e.type === 'keydown') {
+      if(e.key !== 'Enter') {
+        return;
+      } 
+    }
+    
+    todoArray.push(
+      {
+        task: this.state.taskTitle,
+        id: Date.now(),
+        completed: false
+      }
+    )
+    this.setState({todos: todoArray, taskTitle: ''});
   }
   
   render() {
     return (
       <div>
         <h2>Todo App!</h2>
-        <ul>
-          <TodoList todoList={this.state.todos}/>
-        </ul>
-        <input placeholder="...todo"></input>
-        <button>Add Todo</button>
-        <button>Clear Completed</button>
+        <TodoList todoList={this.state.todos}/>
+        <TodoForm 
+          inputValue={this.state.taskTitle}
+          updateTodoList={this.handleChange}
+          updateAddTodo={this.handleAddTodo}
+        />
       </div>
     );
   }
