@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from '../src/components/TodoComponents/TodoList';
 import TodoForm from '../src/components/TodoComponents/TodoForm';
+import '../src/components/TodoComponents/Todo.css';
 
 const todoArray = [
   {
@@ -23,8 +24,22 @@ class App extends React.Component {
       todos: todoArray,
       taskTitle: '',
     };
+    this.handleToggle = this.handleToggle.bind(this);
     this.handleAddTodo = this.handleAddTodo.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleToggle(e) {
+    let taskId = Number(e.target.dataset.id);
+
+    todoArray.map( todo => {
+      if (todo.id === taskId) {
+        todo.completed = !todo.completed
+      }
+      return todo;
+    });
+
+    this.setState({todos: todoArray});
   }
 
   handleChange(e) {
@@ -32,6 +47,7 @@ class App extends React.Component {
   }
 
   handleAddTodo(e) {
+    if (this.state.taskTitle === ''){return}
 
     if (e.type === 'keydown') {
       if(e.key !== 'Enter') {
@@ -53,7 +69,10 @@ class App extends React.Component {
     return (
       <div>
         <h2>Todo App!</h2>
-        <TodoList todoList={this.state.todos}/>
+        <TodoList 
+          todoList={this.state.todos}
+          toggleTask={this.handleToggle}
+        />
         <TodoForm 
           inputValue={this.state.taskTitle}
           updateTodoList={this.handleChange}
