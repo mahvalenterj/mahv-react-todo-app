@@ -23,28 +23,22 @@ class App extends React.Component {
     this.state = {
       todos: todoArray,
       taskTitle: '',
-      isComplete: false,
     };
     this.handleToggle = this.handleToggle.bind(this);
-    this.handleAddTodo = this.handleAddTodo.bind(this);
     this.handleChange = this.handleChange.bind(this);
-
-    console.log(this.state.todos)
+    this.handleAddTodo = this.handleAddTodo.bind(this);
+    this.handleRemoveTodos = this.handleRemoveTodos.bind(this);
   }
 
   handleToggle(e) {
     let taskId = Number(e.target.dataset.id);
 
-    todoArray.map( todo => {
-      if (todo.id === taskId) {
-        todo.completed = !todo.completed
-      }
-      return todo;
+    this.setState({
+      todos: this.state.todos.map( todo => {
+        if (todo.id === taskId) {todo.completed = !todo.completed}
+        return todo;
+      })
     });
-
-    this.setState({todos: todoArray});
-    console.log(this.state.todos)
-
   }
 
   handleChange(e) {
@@ -58,14 +52,20 @@ class App extends React.Component {
       if(e.key !== 'Enter') {return} 
     }
     
-    todoArray.push(
+    this.state.todos.push(
       {
         task: this.state.taskTitle,
         id: Date.now(),
-        completed: this.state.isComplete,
+        completed: false,
       }
     )
-    this.setState({todos: todoArray, taskTitle: ''});
+    this.setState({todos: this.state.todos, taskTitle: ''});
+  }
+
+  handleRemoveTodos() {  
+
+    this.setState({
+      todos: this.state.todos.filter( todo => !todo.completed)});
   }
   
   render() {
@@ -80,6 +80,7 @@ class App extends React.Component {
           inputValue={this.state.taskTitle}
           updateTodoList={this.handleChange}
           updateAddTodo={this.handleAddTodo}
+          updateRemoveTodos={this.handleRemoveTodos}
         />
       </div>
     );
