@@ -1,7 +1,117 @@
-.incomplete {
-    text-decoration: none;
+/* General Styling & Resets*/
+
+.app-container {
+    box-sizing: border-box;
+    margin: 0 auto;
+    position: relative;
+
+    width: 100%;
+    max-width: 700px;
+
+    font-family: 'Kalam', cursive;
+    font-size: 62.5%;
+
+    background-color: palegoldenrod;
 }
 
+input, button {
+    padding: 0;
+    border: none;
+    background-image:none;
+    background-color:transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    font-family: 'Kalam', cursive;
+}
+
+h1, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Line & Margin Styling */
+
+.left-margin {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10%;
+    height: 100%;
+    border-right: 1px solid red;
+}
+
+h1, li, .input-field, .btn-field {
+    padding: 1% 2% 0 12%;
+    border-bottom: 1px solid dodgerblue;
+}
+
+/* Header */
+
+h1 {
+    font-size: 2.4rem;
+    font-weight: bold;
+    padding-top: 2%;
+}
+
+/* List Styling */
+
+ul {
+    list-style: none;
+}
+
+li {
+    overflow-wrap: break-word;
+    font-size: 1.6rem;
+}
+
+.item-text {
+    cursor: pointer;
+}
+
+.empty-list {
+    color: transparent;
+}
+
+/* Toggle Completed Todos */
+
+@keyframes complete{
+    0%   { width : 0; }
+    100% { width: 100%; }
+}
 .complete {
-    text-decoration: line-through;
+    position: relative;
+}
+.complete:after {
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: black;
+    animation-name: complete;
+    animation-duration: .5s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards; 
+}
+
+/* Input Form and Button Styling */
+
+input {
+    width: 100%;
+    font-size: 1.6rem;
+}
+
+.btn-field {
+    height: 41px;
+}
+
+button {
+    font-size: 1.2rem;
+    margin-left: 2%;
+    margin-right: 2%;
+    cursor: pointer;
 }

@@ -2,12 +2,14 @@ import React from 'react';
 import './Todo.css';
 
 const Todo = props => 
-    <li 
+    <li>
+        <span         
         onClick={props.updateTask} 
         data-id={props.taskId}
-        className={props.className}
-    >
-        {props.task}
+        className={`item-text ${props.className}`}
+        >
+            {props.task}
+        </span>
     </li>;
 
 export default Todo;

@@ -70,18 +70,31 @@ class App extends React.Component {
   
   render() {
     return (
-      <div>
-        <h2>Todo App!</h2>
-        <TodoList 
-          todoList={this.state.todos}
-          toggleTask={this.handleToggle}
-        />
-        <TodoForm 
-          inputValue={this.state.taskTitle}
-          updateTodoList={this.handleChange}
-          updateAddTodo={this.handleAddTodo}
-          updateRemoveTodos={this.handleRemoveTodos}
-        />
+      <div className='app-container'>
+        <div className='left-margin'></div>
+        <div className='list-container'>
+          <h1>Todo List</h1>
+          <TodoList 
+            todoList={this.state.todos}
+            toggleTask={this.handleToggle}
+          />
+          <TodoForm 
+            inputValue={this.state.taskTitle}
+            updateTodoList={this.handleChange}
+            updateAddTodo={this.handleAddTodo}
+            updateRemoveTodos={this.handleRemoveTodos}
+          />
+          <ul className='empty-list'>
+            <li>.</li>
+            <li>.</li>
+            <li>.</li>
+            <li>.</li>
+            <li>.</li>
+            <li>.</li>
+            <li>.</li>
+            <li>.</li>
+          </ul>
+        </div>
       </div>
     );
   }
