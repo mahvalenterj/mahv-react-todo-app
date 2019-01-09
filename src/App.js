@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from '../src/components/TodoComponents/TodoList';
 import TodoForm from '../src/components/TodoComponents/TodoForm';
+import EmptyList from './components/EmptyList'
 import '../src/components/TodoComponents/Todo.css';
 
 const todoArray = [
@@ -24,13 +25,9 @@ class App extends React.Component {
       todos: todoArray,
       taskTitle: '',
     };
-    this.handleToggle = this.handleToggle.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleAddTodo = this.handleAddTodo.bind(this);
-    this.handleRemoveTodos = this.handleRemoveTodos.bind(this);
   }
 
-  handleToggle(e) {
+  handleToggle = (e) => {
     let taskId = Number(e.target.dataset.id);
 
     this.setState({
@@ -41,11 +38,11 @@ class App extends React.Component {
     });
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.setState({taskTitle: e.target.value});
   }
 
-  handleAddTodo(e) {
+  handleAddTodo = (e) => {
     if (this.state.taskTitle === ''){return}
 
     if (e.type === 'keydown') {
@@ -62,8 +59,7 @@ class App extends React.Component {
     this.setState({todos: this.state.todos, taskTitle: ''});
   }
 
-  handleRemoveTodos() {  
-
+  handleRemoveTodos = () => {  
     this.setState({
       todos: this.state.todos.filter( todo => !todo.completed)});
   }
@@ -84,16 +80,7 @@ class App extends React.Component {
             updateAddTodo={this.handleAddTodo}
             updateRemoveTodos={this.handleRemoveTodos}
           />
-          <ul className='empty-list'>
-            <li>.</li>
-            <li>.</li>
-            <li>.</li>
-            <li>.</li>
-            <li>.</li>
-            <li>.</li>
-            <li>.</li>
-            <li>.</li>
-          </ul>
+          <EmptyList />
         </div>
       </div>
     );
