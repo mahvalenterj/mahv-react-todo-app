@@ -25,7 +25,8 @@ class App extends React.Component {
     this.state = {
       todos: todoArray,
       filteredTodos: [],
-      taskTitle: '',
+      taskTitle: "",
+      searchTitle: ""
     };
   }
 
@@ -62,24 +63,32 @@ class App extends React.Component {
   }
 
   handleRemoveTodos = () => {  
+    if (this.state.searchTitle) {
+      alert ("Please clear search before clearing items.")
+      return
+    }
     this.setState({
-      todos: this.state.todos.filter( todo => !todo.completed)});
+      todos: this.state.todos.filter( todo => !todo.completed)
+    })
   }
 
   handleSearchChange = (e) => {
-    let filteredTodos = this.state.todos
 
-    if (e.target.value !== "") {
-      filteredTodos = filteredTodos.filter( todo => {
-        return todo.task.toLowerCase().includes(e.target.value.toLowerCase());
-      })
+    let filterTodos = this.state.todos.filter( todo => {
+      return todo.task.toLowerCase().includes(e.target.value.toLowerCase());
+    })
+
+    if (filterTodos.length === this.state.todos.length) {
+      this.setState({
+        filteredTodos: [],
+        searchTitle: e.target.value
+      });
     } else {
-      filteredTodos = this.state.todos;
+      this.setState({
+        filteredTodos: filterTodos,
+        searchTitle: e.target.value
+      });
     }
-
-    this.setState({
-      filteredTodos,
-    });
   }
 
   render() {
