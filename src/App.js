@@ -1,6 +1,8 @@
 import React from 'react';
 import TodoList from '../src/components/TodoComponents/TodoList';
 import TodoForm from '../src/components/TodoComponents/TodoForm';
+import SearchForm from '../src/components/TodoComponents/SearchForm';
+import EmptyList from './components/EmptyList'
 import '../src/components/TodoComponents/Todo.css';
 
 const todoArray = [
@@ -22,15 +24,13 @@ class App extends React.Component {
     super();
     this.state = {
       todos: todoArray,
-      taskTitle: '',
+      filteredTodos: [],
+      taskTitle: "",
+      searchTitle: ""
     };
-    this.handleToggle = this.handleToggle.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleAddTodo = this.handleAddTodo.bind(this);
-    this.handleRemoveTodos = this.handleRemoveTodos.bind(this);
   }
 
-  handleToggle(e) {
+  handleToggle = (e) => {
     let taskId = Number(e.target.dataset.id);
 
     this.setState({
@@ -41,11 +41,11 @@ class App extends React.Component {
     });
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.setState({taskTitle: e.target.value});
   }
 
-  handleAddTodo(e) {
+  handleAddTodo = (e) => {
     if (this.state.taskTitle === ''){return}
 
     if (e.type === 'keydown') {
@@ -62,12 +62,35 @@ class App extends React.Component {
     this.setState({todos: this.state.todos, taskTitle: ''});
   }
 
-  handleRemoveTodos() {  
-
+  handleRemoveTodos = () => {  
+    if (this.state.searchTitle) {
+      alert ("Please clear search before clearing items.")
+      return
+    }
     this.setState({
-      todos: this.state.todos.filter( todo => !todo.completed)});
+      todos: this.state.todos.filter( todo => !todo.completed)
+    })
   }
-  
+
+  handleSearchChange = (e) => {
+
+    let filterTodos = this.state.todos.filter( todo => {
+      return todo.task.toLowerCase().includes(e.target.value.toLowerCase());
+    })
+
+    if (filterTodos.length === this.state.todos.length) {
+      this.setState({
+        filteredTodos: [],
+        searchTitle: e.target.value
+      });
+    } else {
+      this.setState({
+        filteredTodos: filterTodos,
+        searchTitle: e.target.value
+      });
+    }
+  }
+
   render() {
     return (
       <div className='app-container'>
@@ -75,7 +98,7 @@ class App extends React.Component {
         <div className='list-container'>
           <h1>Todo List</h1>
           <TodoList 
-            todoList={this.state.todos}
+            todoList={ this.state.filteredTodos.length ? this.state.filteredTodos : this.state.todos }
             toggleTask={this.handleToggle}
           />
           <TodoForm 
@@ -84,16 +107,11 @@ class App extends React.Component {
             updateAddTodo={this.handleAddTodo}
             updateRemoveTodos={this.handleRemoveTodos}
           />
-          <ul className='empty-list'>
-            <li>.</li>
-            <li>.</li>
-            <li>.</li>
-            <li>.</li>
-            <li>.</li>
-            <li>.</li>
-            <li>.</li>
-            <li>.</li>
-          </ul>
+          <SearchForm 
+            inputValue={this.state.searchTitle}
+            updateSearchChange={this.handleSearchChange}
+          />
+          <EmptyList />
         </div>
       </div>
     );
