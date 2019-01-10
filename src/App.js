@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from '../src/components/TodoComponents/TodoList';
 import TodoForm from '../src/components/TodoComponents/TodoForm';
+import SearchForm from '../src/components/TodoComponents/SearchForm';
 import EmptyList from './components/EmptyList'
 import '../src/components/TodoComponents/Todo.css';
 
@@ -23,6 +24,7 @@ class App extends React.Component {
     super();
     this.state = {
       todos: todoArray,
+      filteredTodos: [],
       taskTitle: '',
     };
   }
@@ -63,7 +65,23 @@ class App extends React.Component {
     this.setState({
       todos: this.state.todos.filter( todo => !todo.completed)});
   }
-  
+
+  handleSearchChange = (e) => {
+    let filteredTodos = this.state.todos
+
+    if (e.target.value !== "") {
+      filteredTodos = filteredTodos.filter( todo => {
+        return todo.task.toLowerCase().includes(e.target.value.toLowerCase());
+      })
+    } else {
+      filteredTodos = this.state.todos;
+    }
+
+    this.setState({
+      filteredTodos,
+    });
+  }
+
   render() {
     return (
       <div className='app-container'>
@@ -71,7 +89,7 @@ class App extends React.Component {
         <div className='list-container'>
           <h1>Todo List</h1>
           <TodoList 
-            todoList={this.state.todos}
+            todoList={ this.state.filteredTodos.length ? this.state.filteredTodos : this.state.todos }
             toggleTask={this.handleToggle}
           />
           <TodoForm 
@@ -79,6 +97,10 @@ class App extends React.Component {
             updateTodoList={this.handleChange}
             updateAddTodo={this.handleAddTodo}
             updateRemoveTodos={this.handleRemoveTodos}
+          />
+          <SearchForm 
+            inputValue={this.state.searchTitle}
+            updateSearchChange={this.handleSearchChange}
           />
           <EmptyList />
         </div>

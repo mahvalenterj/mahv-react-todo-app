@@ -8,13 +8,13 @@ const TodoForm = (props) => {
                     onChange={props.updateTodoList} 
                     onKeyDown={props.updateAddTodo} 
                     value={props.inputValue}
-                    placeholder='...add todo here'
+                    placeholder='...add todo'
                 >
                 </input>
             </div>
             <div className='btn-field'>
-                <button onClick={props.updateAddTodo}>+ Add Todo</button>
-                <button onClick={props.updateRemoveTodos}>- Clear Completed</button>
+                <button onClick={props.updateAddTodo}>Add Todo</button>
+                <button onClick={props.updateRemoveTodos}>Clear Completed</button>
             </div>
         </div>
     );
