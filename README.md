@@ -1,22 +1,52 @@
-# React-Todo
+# Todo List - React Application
 
-- At this point you have become familiar with the DOM and have built out User Interfaces using HTML and CSS and some JavaScript using custom components. And you've even had some practice working with React at a basic level. Now we're going to start adding some functionality to that work-flow. It's one thing to be able to build UI components using react, but what about the interactivity of those components?
+## Overview
 
-## Initializing the project.
+Two day solo project to build a Todo list application using React. User can add new todos to list, search todos by name, mark completed todos, and clear completed todos from list.
+
+## Deployment
+
+Deployed via netlify at [https://catolnai-todo-app.netlify.com](https://catolnai-todo-app.netlify.com/)
+
+## Tech Stack
+
+JavaScript | React | CSS
+
+## Application
+
+### Dependencies
+
+`react` | `react-dom` | `react-scripts`
+
+### File Structure
+
+- root directory
+	- package.json and yarn.lock
+	- `public` directory
+    - index.html: HTML file to run React App
+  - `src` directory
+    - index.js: JavaScript file to run React App
+    - App.js: App's main react component to render sub-components, handle state, and perform handler functions
+    - `components` directory
+      - EmptyList.js: Component for styling purposes to create empty lines at end of list
+      - `TodoComponents` directory
+        - TodoForm.js: Input and Sumbit component to add new todo item
+        - TodoList.js: Unordered list container for each Todo Components
+        - Todo.js: List component for each todo
+        - SearchForm.js: Input component to search for todos by name
+        - Todo.css: Styling file for Todo App components
+
+### Initializing
 
 - `Fork and clone` this project and cd into your cloned version.
 - `yarn install` will pull in all the node_modules you need.
 - `yarn start` will start a development server on your `http://localhost:3000`.
-  - If yarn asks you to select different port with some error message, just select `Y` and it will pull it up on port 3001. This simply means you have a development server up and running on that port already.
+  - If yarn asks you to select different port with some error message, just select `Y` and it will pull it up on port 3001.
+  - This simply means you have a development server up and running on that port already.
 
-## Instructions
+### Todo List Array & Object Model
 
-- Your job is to write the components to complete the Todo List application.
-- Your todo list should be fully functional and you should design it however you'd like. Feel free to get creative here. I have supplied a gif for you to see what the MVP functionality is required to look like over the course of the two days.
-
-![Todo App MVP](todo.gif)
-
-- Your todo data should be an array of objects that look a lot like this:
+The todos are an array of objects with the following keys: task, id, completed.
 
 ```js
 [
@@ -33,35 +63,26 @@
 ];
 ```
 
-- The `task` field is the todo title that will be shown to the user.
-- The `completed` field should default to `false` and will be the field that we toggle when we complete a todo.
-- The `id` field is a unique `Time Stamp` that will be assigned by `Date.now()`.
+- The `task` field is the todo title that is be shown to the user.
+- The `completed` field defaults to `false` and toggles to `true` when a user completes a todo.
+- The `id` field is a unique `Time Stamp` that is assigned by `Date.now()`.
 
-#### Day 1 Challenges
+### Components
 
-- **Don't focus on styling yet**. We want you to worry about function over form today.
-- Your todo list should display a list of todos, an input field, a submit button, and a clear all button.
-- Be sure to use the given files for building out these components.
-- `<App />` will hold all the data needed for this project. It will also be the container for your Todo Components.
-  - All of your application data will be stored here on `<App />`.
-  - All of your `handler` functions should live here on `<App />`.
-- `<TodoList />` receives your Todos array and iterates over the list generating a new `<Todo />` for each element in the array.
-- `<Todo />` is a component that takes in the `todo` data and displays the task to the screen.
-- `<TodoForm>` will hold your input field and your `Add Todo` and `Clear Completed` buttons.
-  - Your input field should take in user input, and allow a user to press `Enter` or click on the `Submit Button` to add a todo to your list.
-  - Once a todo is submitted, the Todo List should re-render and show the added todo.
+#### *`<App />`*
+All application data and `handler` functions are be stored within `<App />`. It is also the container for all secondary Todo Components.
+  
+#### *`<TodoList />`*
 
-#### Day 2 Challenges
+`<TodoList />` receives the Todos array and iterates over the list generating a new `<Todo />` for each element in the array.
 
-- Add the functionality to toggle your todo's completed flag from `false` to `true`.
-  - Once a todo is completed, be sure to demonstrate to the user that the todo is completed by adding a line-through style property if the completed flag is true.
-- Add the ability to remove any todos that you have completed. `.filter` will be your best friend here. When a user clicks on the `Clear Completed` button call your handler function that will filter out any todos that have the completed flag toggled to `true`.
-- **Now is the time to style** Take your time to make this an app that you can be proud of.
+#### *`<Todo />`*
 
-#### Stretch Problems
+`<Todo />` is a component that takes in the `todo` data and displays the `task` to the screen. A user can click the todo which will toggle the task's `completed` status to `true`.
 
-- **Persist your data** in `window.localStorage()` hint: you may have to pass your data to a stringifier to get it to live inside the `localStorage()` of the browser. This will cause it to persist past the page refresh.
+#### *`<TodoForm />`*
+`<TodoForm>` holds the input field, `Add Todo` and `Clear Completed` buttons. The input field takes in user input, and allow a user to press `Enter` or click on the `Add Todo` to add a todo to the list. Once a todo is submitted, the `<TodoList />` re-renders and shows the added todo. A user can click on the `Clear Completed` button to clear (`filter` out) all tasks from the task array that are marked completed (i.e. `completed` is `true`) and the `<TodoList />` re-renders with the updated array list.
 
-- **Search Functionality** Add a input bar that allows you to search through your tasks and only show the ones that match the search input.
+#### *`<SearchForm />`*
+`<SearchForm>` holds an input field that takes in user input. As an input is typed, the todo array `filter`s and the `<TodoList />` re-renders to shows the todos that match the input by the todo `task` name.
 
-- **Hosting** Create a [Netlify Account](https://www.netlify.com/) and follow the tutorial on how to host your shiny new todo app on the world wide web.
