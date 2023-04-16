@@ -8,7 +8,7 @@ const SearchForm = (props) => {
                     onChange={props.updateSearchChange} 
                     onKeyDown={props.updateFilterTodos} 
                     value={props.inputValue}
-                    placeholder='...search todos'
+                    placeholder='...buscar tarefas'
                 >
                 </input>
             </div>

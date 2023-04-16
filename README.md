@@ -1,13 +1,12 @@
-# Todo List - React Application...
+# Lista de tarefas - Aplicação em React ...
 
 ## Overview
 
-Two day solo project to build a Todo list application using React. User can add new todos to list, search todos by name, mark completed todos, and clear completed todos from list.
+Projeto solo de dois dias para criar um aplicativo de lista de tarefas usando React. O usuário pode adicionar novos todos à lista, pesquisar todos por nome, marcar todos concluídos e limpar todos concluídos da lista.
 
 ## Deployment
 
-Deployed via netlify at [https://catolnai-todo-app.netlify.com](https://catolnai-todo-app.netlify.com/)
-
+Deployed via netlify at 
 ## Tech Stack
 
 JavaScript | React | CSS

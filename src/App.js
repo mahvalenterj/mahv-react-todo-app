@@ -7,12 +7,12 @@ import '../src/components/TodoComponents/Todo.css';
 
 const todoArray = [
   {
-      task: 'Organize Garage',
+      task: 'Organizar a Garagem',
       id: 1528817077286,
       completed: false
   },
   {
-      task: 'Bake Cookies',
+      task: 'Cozinhar',
       id: 1528817084358,
       completed: false
   }
@@ -40,7 +40,7 @@ class App extends React.Component {
       })
     });
   }
-
+  
   handleChange = (e) => {
     this.setState({taskTitle: e.target.value});
   }
@@ -92,11 +92,12 @@ class App extends React.Component {
   }
 
   render() {
+   
     return (
       <div className='app-container'>
         <div className='left-margin'></div>
         <div className='list-container'>
-          <h1>Todo List</h1>
+          <h1>Lista de Tarefas</h1>
           <TodoList 
             todoList={ this.state.filteredTodos.length ? this.state.filteredTodos : this.state.todos }
             toggleTask={this.handleToggle}
@@ -107,6 +108,7 @@ class App extends React.Component {
             updateAddTodo={this.handleAddTodo}
             updateRemoveTodos={this.handleRemoveTodos}
           />
+
           <SearchForm 
             inputValue={this.state.searchTitle}
             updateSearchChange={this.handleSearchChange}
