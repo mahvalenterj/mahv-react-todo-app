@@ -6,7 +6,8 @@ Projeto solo de dois dias para criar um aplicativo de lista de tarefas usando Re
 
 ## Deployment
 
-Deployed via netlify at 
+Deployed via netlify at [https://lista-de-tarefas-mah.netlify.app/]
+
 ## Tech Stack
 
 JavaScript | React | CSS
